@@ -1,0 +1,12 @@
+{
+  "editor.wordWrapColumn": 120,
+  "files.eol": "\n",
+  "go.lintTool": "golangci-lint",
+  "go.testFlags": ["-v", "-cover", "-race"],
+  "go.formatTool": "gofmt",
+  "go.formatFlags": ["-l -s -w"],
+  "go.toolsEnvVars": {
+    "GOFLAGS": "-mod=vendor"
+  },
+  "prettier.printWidth": 120
+}

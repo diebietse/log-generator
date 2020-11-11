@@ -1,0 +1,3 @@
+A plaintext log
+{"message": "A JSON log"}
+{"message": "{\"escaped\":\"An escaped JSON log\"}"}
