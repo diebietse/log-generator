@@ -19,5 +19,14 @@ build:
 	CGO_ENABLED=0 go build -v -mod=vendor \
 		-o bin/log-generator ./main.go
 
+.PHONY: docker
+docker:
+	docker build \
+		--tag diebietse/log-generator:local .
+
+.PHONY: run-docker
+run-docker:
+	docker run -v${PWD}/example_logs.txt:/app/example_logs.txt -ti diebietse/log-generator:local
+
 lint:
 	docker run --rm -it -w /sources -v $(shell pwd):/sources golangci/golangci-lint:v1.32.2-alpine golangci-lint run -v
