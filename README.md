@@ -24,3 +24,17 @@ You can also run it in docker using:
 make docker
 make run docker
 ```
+
+## Run K8s
+
+Create a configmap named `log-config` with key `log-config` containing the example logs:
+
+```console
+kubectl create configmap log-config --from-file=log-config=example_logs.txt --dry-run=client -o yaml | kubectl apply -f -
+```
+
+Create a deployment of the log-generator:
+
+```console
+kubectl apply -f ./k8s.yml
+```
