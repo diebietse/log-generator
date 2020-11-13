@@ -23,7 +23,10 @@ func main() {
 	}
 
 	ticker := time.NewTicker(time.Duration(conf.LogDelaySeconds) * time.Second)
-	logLines := loadLogs(conf.LogSourceFilePath)
+	logLines, err := loadLogs(conf.LogSourceFilePath)
+	if err != nil {
+		log.Fatalf("Could not load logs: %v\n", err)
+	}
 	line := 0
 	for range ticker.C {
 		fmt.Println(logLines[line])
@@ -32,10 +35,10 @@ func main() {
 	}
 }
 
-func loadLogs(logSourceFilePath string) []string {
-	f, err := os.Open(logSourceFilePath) // os.OpenFile has more options if you need them
+func loadLogs(logSourceFilePath string) ([]string, error) {
+	f, err := os.Open(logSourceFilePath)
 	if err != nil {
-		log.Fatalf("Could not open file '%s': %v\n", logSourceFilePath, err)
+		return nil, fmt.Errorf("could not open file '%s': %w", logSourceFilePath, err)
 	}
 	defer f.Close()
 
@@ -47,5 +50,5 @@ func loadLogs(logSourceFilePath string) []string {
 		logLines = append(logLines, scanner.Text())
 	}
 
-	return logLines
+	return logLines, nil
 }
