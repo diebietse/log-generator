@@ -1,6 +1,3 @@
-# GITVERSION = $(shell git describe --tags --always --dirty  | tr -d '\n')
-# GIT_HASH = $(shell git rev-parse HEAD)
-
 .PHONY: vendor
 vendor:
 	go mod tidy
@@ -28,5 +25,10 @@ docker:
 run-docker:
 	docker run -v${PWD}/example_logs.txt:/app/example_logs.txt -ti diebietse/log-generator:local
 
+.PHONY: lint
 lint:
 	docker run --rm -it -w /sources -v $(shell pwd):/sources golangci/golangci-lint:v1.32.2-alpine golangci-lint run -v
+
+.PHONY: test
+test:
+	go test ./... -cover -race -mod=vendor -v
