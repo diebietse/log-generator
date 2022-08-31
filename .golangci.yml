@@ -6,21 +6,19 @@ run:
 linters:
   enable-all: false
   enable:
-    - deadcode
     - errcheck
     - govet
     - ineffassign
     - typecheck
-    - varcheck
     - dupl
     - goconst
     - gofmt
-    - golint
     - unconvert
     - gosimple
     - unused
     - staticcheck
-    - structcheck
+    - unused
+    - revive
 
 issues:
   max-per-linter: 0

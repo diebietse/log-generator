@@ -27,7 +27,7 @@ run-docker:
 
 .PHONY: lint
 lint:
-	docker run --rm -it -w /sources -v $(shell pwd):/sources golangci/golangci-lint:v1.32.2-alpine golangci-lint run -v
+	docker run --rm -it -w /sources -v $(shell pwd):/sources golangci/golangci-lint:v1.49.0-alpine golangci-lint run -v
 
 .PHONY: test
 test:
