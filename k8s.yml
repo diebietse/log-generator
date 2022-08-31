@@ -21,6 +21,8 @@ spec:
           env:
           - name: LOG_SOURCE_FILE_PATH
             value: "/data/log-config"
+          - name: LOG_DELAY
+            value: "1s"
           volumeMounts:
             - name: log-config
               mountPath: /data/log-config

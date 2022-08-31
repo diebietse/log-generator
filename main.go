@@ -11,8 +11,8 @@ import (
 )
 
 type config struct {
-	LogSourceFilePath string `long:"log_source_file_path" env:"LOG_SOURCE_FILE_PATH" default:"example_logs.txt" description:"Location to load the file containing the data we want to log"`
-	LogDelaySeconds   int    `long:"log_delay_seconds" env:"LOG_DELAY_SECONDS" default:"1" description:"Time to wait before printing a log line"`
+	LogSourceFilePath string        `long:"log_source_file_path" env:"LOG_SOURCE_FILE_PATH" default:"example_logs.txt" description:"Location to load the file containing the data we want to log"`
+	LogDelay          time.Duration `long:"log_delay" env:"LOG_DELAY" default:"1s" description:"Time to wait before printing a log line"`
 }
 
 func main() {
@@ -22,7 +22,7 @@ func main() {
 		log.Fatalf("Could not load config: %v\n", err)
 	}
 
-	ticker := time.NewTicker(time.Duration(conf.LogDelaySeconds) * time.Second)
+	ticker := time.NewTicker(conf.LogDelay)
 	logLines, err := loadLogs(conf.LogSourceFilePath)
 	if err != nil {
 		log.Fatalf("Could not load logs: %v\n", err)
